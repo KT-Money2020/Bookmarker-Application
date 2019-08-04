@@ -37,7 +37,7 @@ function saveBookmark(e){
         /*You cannot command the local storage to be set like this as the localStorage only accepts strings, therefore you need to manually turn it into a string using the JSON command as shown below. Cannot do this: localStorage.setItem('bookmarks', bookmarks);*/
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     } else {
-        /* Here is where we will be receiving back the local bookmark array in order to update the object data with new ones */
+        /* Here is where we will be receiving back the local bookmark array in order to update it new ones */
         
         //JSON.parse() turns the string back into JSON aka the array holding the object
         //Get bookmark from local storage
@@ -47,15 +47,25 @@ function saveBookmark(e){
         //Re-set back to localStorage
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     }
-    
+ 
     //This premade method is designed to prevent the page from actually submitting so that we could work with the code
     e.preventDefault();
 }
 
 
-
-
-
+//Fetch bookmarks
+function fetchBookmarks(){
+    // Get bookmarks from localStorage
+    var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    
+    console.log(bookmarks);
+    
+    //Get output id
+    var bookmarksResults = document.getElementById('bookmarksResults');
+    
+    //Build output
+    bookmarksResults.innerHTML= 'HELLO';
+}
 
 
 
