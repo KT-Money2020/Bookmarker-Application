@@ -28,7 +28,7 @@ function saveBookmark(e){
     
     //Test if bookmarks is null
     /*testing to see if the so called 'bookmark' object is empty within the localStorage and if not then its going to create an empty array to add into the storage which will then later be holding all the objects we make. And of course all of these objects and arrays has to be turned into a string in order to be held in local storage */
-    if(localStorage.getItem('booksmarks') === null){
+    if(localStorage.getItem('bookmarks') === null){
         //Init array
         var bookmarks = [];
         //Add to array
@@ -47,30 +47,11 @@ function saveBookmark(e){
         //Re-set back to localStorage
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     }
- 
+  
     //This premade method is designed to prevent the page from actually submitting so that we could work with the code
     e.preventDefault();
 }
-
-
-//Fetch bookmarks
-function fetchBookmarks(){
-    // Get bookmarks from localStorage
-    var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
-    
-    console.log(bookmarks);
-    
-    //Get output id
-    var bookmarksResults = document.getElementById('bookmarksResults');
-    
-    //Build output
-    bookmarksResults.innerHTML= 'HELLO';
-}
-
-
-
-
-
+ 
 
 
 
