@@ -37,26 +37,53 @@ function saveBookmark(e){
         /*You cannot command the local storage to be set like this as the localStorage only accepts strings, therefore you need to manually turn it into a string using the JSON command as shown below. Cannot do this: localStorage.setItem('bookmarks', bookmarks);*/
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     } else {
-        /* Here is where we will be receiving back the local bookmark array in order to update it new ones */
+        /* Here is where we will be receiving back the local bookmark array in order to update it with a new one */
         
         //JSON.parse() turns the string back into JSON aka the array holding the object
         //Get bookmark from local storage
         var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
         //Add bookmark to array 
+        //Add another object into the array
         bookmarks.push(bookmark);
         //Re-set back to localStorage
+        //Send back this array with newly added objects to the localStorage
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     }
-  
+    fetchBookmarks();
     //This premade method is designed to prevent the page from actually submitting so that we could work with the code
     e.preventDefault();
 }
  
+//Delete bookmark
+function deleteBookmark(url){
+    console.log(url);
+}
 
+//Fetch bookmarks
 
-
-
-
+function fetchBookmarks(){
+    var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    
+    //Get output id
+    var bookmarksResults = document.getElementById('bookmarksResults');
+    
+    //Build output
+    bookmarksResults.innerHTML = '';
+    
+    
+    for(var i = 0; i < bookmarks.length; i++){
+     //Looping through ever objects there is in the array and then accessing their names and url to display on main page
+     var name = bookmarks[i].name;
+     var url = bookmarks[i].url;   
+        
+     bookmarksResults.innerHTML += '<div class="well">'+
+                                   '<h3>'+name+
+                                   ' <a class="btn btn-default" target="_blank" href="'+url+'">Visit</a>' +
+                                   ' <a onclick="deleteBookmark(\''+url+'\')" class="btn btn-danger" href="#">Delete</a>' +         
+                                   '</h3>'+
+                                   '</div>';
+    }
+}
 
 
 
