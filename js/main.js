@@ -43,39 +43,42 @@ function saveBookmark(e){
         //Get bookmark from local storage
         var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
         //Add bookmark to array 
-        //Add another object into the array
+        //Push new object into array and use that array to replace the old one from the storage with this newly updated one
         bookmarks.push(bookmark);
         //Re-set back to localStorage
         //Send back this array with newly added objects to the localStorage
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     }
+  
     fetchBookmarks();
     //This premade method is designed to prevent the page from actually submitting so that we could work with the code
     e.preventDefault();
 }
  
+
+
+
 //Delete bookmark
 function deleteBookmark(url){
     console.log(url);
 }
 
 //Fetch bookmarks
-
 function fetchBookmarks(){
     var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
-    
+
     //Get output id
     var bookmarksResults = document.getElementById('bookmarksResults');
-    
+
     //Build output
     bookmarksResults.innerHTML = '';
-    
-    
+
+
     for(var i = 0; i < bookmarks.length; i++){
      //Looping through ever objects there is in the array and then accessing their names and url to display on main page
      var name = bookmarks[i].name;
      var url = bookmarks[i].url;   
-        
+
      bookmarksResults.innerHTML += '<div class="well">'+
                                    '<h3>'+name+
                                    ' <a class="btn btn-default" target="_blank" href="'+url+'">Visit</a>' +
@@ -84,6 +87,7 @@ function fetchBookmarks(){
                                    '</div>';
     }
 }
+
 
 
 
