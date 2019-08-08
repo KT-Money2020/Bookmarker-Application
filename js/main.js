@@ -9,6 +9,11 @@ function saveBookmark(e){
     //Get form values
     var siteName = document.getElementById('siteName').value;
     var siteUrl = document.getElementById('siteUrl').value;
+    //This part is confusing. If validateForm does not work then return false?
+    if(!validateForm(siteName, siteUrl)){
+       return false;
+       }
+    
     //When you want to store data to localStorage you would most likely use an array of objects to store that data
     var bookmark = {
         name: siteName,
@@ -50,6 +55,9 @@ function saveBookmark(e){
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     }
   
+    //clear form 
+    document.getElementById('myForm').reset();
+    
     fetchBookmarks();
     //This premade method is designed to prevent the page from actually submitting so that we could work with the code
     e.preventDefault();
@@ -102,10 +110,26 @@ function fetchBookmarks(){
     }
 }
 
-
-
-
-
+//Validate Form
+function validateForm(siteName, siteUrl){
+    //If the box for site name and url is unfilled then alert the user
+    if(!siteName || !siteUrl) {
+        alert('Please fill in the form');
+        //return so that the entire function ends
+        return false;
+    }
+    
+    var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+    var regex = new RegExp(expression);
+    //If the URL is not valid it alerts the user
+    if(!siteUrl.match(regex)){
+        alert('Please use a valid URL');
+        //return so that the entire function ends
+        return false;
+    }
+    
+    return true;
+}
 
 
 
