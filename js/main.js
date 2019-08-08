@@ -60,7 +60,21 @@ function saveBookmark(e){
 
 //Delete bookmark
 function deleteBookmark(url){
-    console.log(url);
+    //Get bookmarks from LocalStorage
+    var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    //Loop through bookmarks
+    for(var i = 0; i < bookmarks.length; i++){
+        if(bookmarks[i].url === url){
+            //Remove from array
+            //splice current iteration, only one from that
+            bookmarks.splice(i,1);
+        }
+    }
+    //Reset back to LocalStorage
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    
+    //Re-fetch bookmarks
+    fetchBookmarks();
 }
 
 //Fetch bookmarks
@@ -75,7 +89,7 @@ function fetchBookmarks(){
 
 
     for(var i = 0; i < bookmarks.length; i++){
-     //Looping through ever objects there is in the array and then accessing their names and url to display on main page
+     //Looping through every objects there is in the array and then accessing their names and url to display on main page
      var name = bookmarks[i].name;
      var url = bookmarks[i].url;   
 
