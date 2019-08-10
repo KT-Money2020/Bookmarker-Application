@@ -8,3 +8,5 @@ Simple application for bookmarking webistes. This app goes along with the "Learn
 ### Usage
 
 Just download and open index.html. It is all client side
+
+Open with any IDE that works with front-end langauges
